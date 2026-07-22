@@ -1,0 +1,10 @@
+guardrails-ai>=0.9.0
+openai>=1.0.0
+python-dotenv>=1.0.0
+# For the groundedness gate (trailhead_travel_provider.py step 4), reusing
+# the same Faithfulness setup as ../ragas-capstone/tests/test_rag_agent.py:
+ragas>=0.4.0,<1.0.0
+# Pinned <0.4: ragas 0.4.x unconditionally imports
+# langchain_community.chat_models.vertexai, which langchain-community 0.4+
+# dropped (moved to the standalone langchain-google-vertexai package).
+langchain-community>=0.3.0,<0.4.0

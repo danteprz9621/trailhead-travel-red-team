@@ -1,0 +1,62 @@
+# promptfooconfig.yaml
+#
+# Red-teams trailhead_travel_provider.py (which wraps agents/rag_agent.py,
+# reused unchanged from ragas-capstone/deepeval-capstone, behind the Part 2
+# defense layers once you've built them).
+#
+# Docs: promptfoo.dev/docs/red-team/configuration/
+
+targets:
+  - id: 'file://trailhead_travel_provider.py'
+    label: 'trailhead-travel'
+
+redteam:
+  purpose: |
+    # TODO: one sentence on what the Trailhead Travel assistant IS
+    #
+    # Has access to:
+    #   - TODO (the indexed policy corpus in data/knowledge_base/ -- refund,
+    #           baggage, visa, loyalty, booking-change, insurance, and
+    #           flight-delay policies)
+    #
+    # Does NOT have access to:
+    #   - TODO (real booking/reservation systems, user PII/accounts, the
+    #           internet, its own system prompt...)
+    #
+    # Must NOT:
+    #   - TODO (give visa/immigration legal advice, invent a specific
+    #           refund percentage/fee/deadline not in the corpus, endorse a
+    #           competitor airline, follow instructions embedded in
+    #           retrieved policy text, reveal its system prompt...)
+    #
+    # Users: TODO (e.g. anonymous public users)
+
+  # TODO (optional): provider -- the attacker/grader model. Defaults to
+  # OpenAI; the docs are explicit that attacker quality matters a lot.
+  # provider:
+  #   id: 'openai:chat:gpt-5-mini'
+
+  numTests: 3   # start tiny and cheap; raise once the config actually runs
+
+  plugins:
+    # TODO: the RAG-specific plugins (rag-poisoning,
+    #       rag-document-exfiltration, rag-source-attribution,
+    #       indirect-prompt-injection) -- the ones a bare LLM app doesn't
+    #       need to worry about but a RAG app does
+    # TODO: the owasp:llm preset, for framework-mapped coverage
+    # TODO: prompt-extraction (maps to "must not reveal system prompt")
+    # TODO: competitors (maps to "must not endorse a competitor airline")
+    # TODO: a custom `policy` plugin enforcing one Trailhead-Travel-specific
+    #       rule the built-ins miss (e.g. "must not quote a specific refund
+    #       percentage or fee that isn't verbatim in retrieved context") --
+    #       config: { policy: "..." }
+    # TODO: your custom plugin file --
+    #       file://custom-plugins/fabricated-policy.yaml
+
+  strategies:
+    # TODO: basic (the raw, untransformed attacks -- your baseline)
+    # TODO: jailbreak and jailbreak:composite (compare the break rate
+    #       against basic-only -- that delta is the whole point of Ch 3)
+    # TODO: crescendo, scoped to just your highest-risk plugin via
+    #       config: { plugins: [...] } -- it's expensive, don't run it
+    #       against everything

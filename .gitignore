@@ -1,0 +1,11 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+*.egg-info/
+.vscode/
+.deepeval/
+# promptfoo's own local output/cache
+.promptfoo/
