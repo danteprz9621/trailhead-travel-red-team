@@ -22,6 +22,24 @@ import os
 # TODO: client = OpenAI(base_url=os.environ["GUARD_BASE_URL"], api_key=os.environ["GUARD_API_KEY"])
 # TODO: LLAMA_GUARD_MODEL = "llama-guard3"  # or your host's model id
 
+from openai import OpenAI
+
+client = OpenAI(base_url=os.environ["GUARD_BASE_URL"], api_key=os.environ["GUARD_API_KEY"])
+
+def llama_guard_chekc(user_msg, assitant_msg) -> tuple[bool, list[str]]:
+    resp = client.chat.completions.create(
+        temperature=0,
+        model = "llama-guard3",
+        messages= [
+            {"role":"user", "content":user_msg},
+            {"role":"assistant", "content":assitant_msg}
+        ]
+    )
+
+    verdict, _, rest = resp.choices[0].message.content
+    is_safe = verdict.strip().lower() == "safe"
+    return is_safe
+
 
 # 1. Write llama_guard_check(user_msg, assistant_msg) -> tuple[bool, list[str]]:
 #    - Build a messages list: the user turn, then the assistant turn
