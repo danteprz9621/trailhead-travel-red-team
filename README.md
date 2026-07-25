@@ -42,9 +42,22 @@ files.
 node --version   # need 18+; promptfoo runs via npx, nothing to install upfront
 python -m venv .venv
 .venv\Scripts\activate        # Windows
-pip install -r requirements.txt
+pip install --only-binary=:all: -r requirements.txt
+```
 
+`--only-binary=:all:` matters on Windows with a recent Python (3.13+):
+plain `pip install` tries to build `litellm` (a `guardrails-ai` dependency)
+from source, which needs a Rust/Cargo toolchain and fails without one.
+Forcing wheels-only skips that and installs a working version instead.
+
+```bash
 guardrails configure          # one-time, free Hub token
+
+# PowerShell -- needed before the hub installs below, or they crash with
+# UnicodeEncodeError trying to print a checkmark on success (Windows
+# console default codepage can't encode it):
+$env:PYTHONIOENCODING="utf-8"
+
 guardrails hub install hub://guardrails/detect_pii
 guardrails hub install hub://guardrails/toxic_language
 guardrails hub install hub://guardrails/detect_jailbreak

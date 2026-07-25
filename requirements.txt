@@ -1,4 +1,5 @@
 guardrails-ai>=0.9.0
+transformers<5.0.0
 openai>=1.0.0
 python-dotenv>=1.0.0
 # For the groundedness gate (trailhead_travel_provider.py step 4), reusing
