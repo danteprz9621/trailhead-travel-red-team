@@ -88,13 +88,3 @@ Build `trailhead_travel_provider.py` and `promptfooconfig.yaml` first —
 bare (unguarded) provider before building `guards.py`/`llama_guard.py` and
 wiring them in, then rerun the identical scan to compare break rates
 before/after.
-
-## Cost note
-
-Unlike `../deepeval-capstone` and `../ragas-capstone`, this project isn't
-free/local end-to-end. `npx promptfoo redteam run` wants a real
-`OPENAI_API_KEY` for decent attack generation and grading — the custom
-plugin (`custom-plugins/fabricated-policy.yaml`) specifically requires it,
-with no local-model fallback. The RAG agent, Guardrails AI, and Llama
-Guard (via Ollama) all stay free/local as before; only the promptfoo half
-costs real, if small, API usage at `numTests: 3`.

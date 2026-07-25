@@ -1,19 +1,5 @@
 """
-Guardrails AI mental model: Validator (one check on a string) -> Guard (a
-composable pipeline of validators) -> on_fail (what happens when a
-validator fails: EXCEPTION/FIX/REASK/REFRAIN/NOOP). For a safety gate,
-on_fail=EXCEPTION is usually right -- it hard-blocks rather than silently
-repairing a violation, which matters: FIX on a PII leak can ship a
-redacted-but-still-leaky answer.
-
-Setup (run once, outside this file):
-    pip install guardrails-ai
-    guardrails configure
-    guardrails hub install hub://guardrails/detect_pii
-    guardrails hub install hub://guardrails/toxic_language
-    guardrails hub install hub://guardrails/detect_jailbreak
-
-Docs: guardrails.dev (Guard, Validators, on_fail actions)
+Guardrails AI
 """
 
 from guardrails import Guard, OnFailAction
